@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "./style.css";
 
 export default class CreateFood extends Component{
     constructor(props) {
@@ -141,6 +140,7 @@ export default class CreateFood extends Component{
                                 selected={this.state.startDate}
                                 onChange={date => this.onChangeDate(date)}
                                 type="date"
+                                dateFormat= "MM/dd/yyyy"
                             />
                         </div>
                     </div>

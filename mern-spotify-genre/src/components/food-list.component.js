@@ -7,8 +7,8 @@ const Food = props => (
         <td>{props.food.location}</td>
         <td>{props.food.description}</td>
         <td>{props.food.price}</td>
-        <td>{props.food.date}</td>
-            <a href="#" onClick={() => { props.deleteFood(props.food._id) }}>delete</a>
+        <td>{props.food.date.split('T')[0]}</td>
+            <a href="/#" onClick={() => { props.deleteFood(props.food._id) }}>delete</a>
     </tr>
 )
 
