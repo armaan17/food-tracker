@@ -11,12 +11,14 @@ router.route('/').get((req, res) => {
 //add new foods
 router.route('/add').post((req, res) => {
     const username = req.body.username;
+    const location = req.body.location;
     const description = req.body.description;
     const price = Number(req.body.price);
     const date = Date.parse(req.body.date);
 
     const newFood = new Food({
         username,
+        location,
         description,
         price,
         date,

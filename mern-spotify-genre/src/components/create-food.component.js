@@ -2,18 +2,21 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "./style.css";
 
 export default class CreateFood extends Component{
     constructor(props) {
         super(props);
 
         this.onChangeUsername = this.onChangeUsername.bind(this);
+        this.onChangeLocation = this.onChangeLocation.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangePrice = this.onChangePrice.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
             username: '',
+            location: '',
             description: '',
             price: 0,
             date: new Date(),
@@ -39,6 +42,12 @@ export default class CreateFood extends Component{
         });
     }
 
+    onChangeLocation(e){
+        this.setState({
+            location: e.target.value
+        });
+    }
+
     onChangeDescription(e){
         this.setState({
             description: e.target.value
@@ -53,7 +62,7 @@ export default class CreateFood extends Component{
 
     onChangeDate(date){
         this.setState({
-            date: date
+            startDate: date
         });
     }
 
@@ -62,9 +71,10 @@ export default class CreateFood extends Component{
 
         const food = {
             username: this.state.username,
+            location: this.state.location,
             description: this.state.description,
             price: this.state.price,
-            date: this.state.date,
+            date: this.state.startDate,
         }
 
         console.log(food);
@@ -77,16 +87,16 @@ export default class CreateFood extends Component{
 
     render() {
         return (
-            <div>
+            <div className="container">
                 <h3>Add a new food</h3>
                 <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                        <label>Username: </label>
-                        <select ref="userInput">
+                    <div className="form-group mb-3">
+                        <label>Who's adding the food? </label>
+                        <select ref="userInput"
                             required
                             className="form-control"
                             value={this.state.username}
-                            onChange={this.onChangeUsername}
+                            onChange={this.onChangeUsername}>
                             {
                                 this.state.users.map(function(user) {
                                     return <option
@@ -97,8 +107,17 @@ export default class CreateFood extends Component{
                         }
                         </select>
                     </div>
-                    <div className="form-group">
-                        <label>Description: </label>
+                    <div className="form-group mb-3">
+                        <label>Where did you get the food? </label>
+                        <input type = "text"
+                            required
+                            className="form-control"
+                            value={this.state.location}
+                            onChange={this.onChangeLocation}
+                            />
+                    </div>
+                    <div className="form-group mb-3">
+                        <label>Describe the food: </label>
                         <input type = "text"
                             required
                             className="form-control"
@@ -106,8 +125,8 @@ export default class CreateFood extends Component{
                             onChange={this.onChangeDescription}
                             />
                     </div>
-                    <div className="form-group">
-                        <label>Price: </label>
+                    <div className="form-group mb-3">
+                        <label>How much did it cost? </label>
                         <input type = "text"
                             required
                             className="form-control"
@@ -115,22 +134,22 @@ export default class CreateFood extends Component{
                             onChange={this.onChangePrice}
                             />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group mb-3">
                         <label>Date: </label>
                         <div>
                             <DatePicker
-                                selected={this.state.date}
-                                onChange={this.onChangeDate}
+                                selected={this.state.startDate}
+                                onChange={date => this.onChangeDate(date)}
+                                type="date"
                             />
                         </div>
                     </div>
                     
                     <div className="form-group">
-                        <input type = "submit" value = "Add a new food" className = "btn btn-primary" />
+                        <input type = "submit" value = "Add" className = "btn btn-primary" />
                     </div>
                 </form>
             </div>
-
         )
     }
 }

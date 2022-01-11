@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import { Link } from "react-router-dom";
 import axios from 'axios';
 
 const Food = props => (
     <tr>
         <td>{props.food.username}</td>
+        <td>{props.food.location}</td>
         <td>{props.food.description}</td>
         <td>{props.food.price}</td>
         <td>{props.food.date}</td>
@@ -45,24 +45,29 @@ export default class FoodList extends Component{
             return <Food food={currentFood} deleteFood={this.deleteFood} key={currentFood._id}/>;
         })
     }
-
+    total = () =>
+        this.state.foods.reduce(
+            (sum, food) => sum + food.price,0
+        )
     render() {
         return (
-            <div>
+            <div className="container">
                 <h3>Logged Foods</h3>
                 <table className="table">
                     <thead className="thead-light">
                         <tr>
-                            <th>Username</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th>Date</th>
+                            <th>Added by: </th>
+                            <th>Where it was it bought: </th>
+                            <th>Description of the Food: </th>
+                            <th>Price of the Food: </th>
+                            <th>When it was purchased: </th>
                         </tr>
                     </thead>
                     <tbody>
                         { this.foodList() }
-                    </tbody>
+                    </tbody>            
                 </table>
+                <h2><center>Total Spent: ${this.total()}</center></h2>
             </div>
         )
     }

@@ -9,7 +9,7 @@ import CreateFood from "./components/create-food.component";
 
 function App() {
   return (
-    <Router> 
+    <Router>
         <Navbar />
         <Routes>
         <Route path="/" exact element={<FoodList />} />
