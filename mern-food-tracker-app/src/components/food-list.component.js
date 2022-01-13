@@ -57,7 +57,7 @@ export default class FoodList extends Component{
                     <thead className="thead-light">
                         <tr>
                             <th>Added by: </th>
-                            <th>Where it was it bought: </th>
+                            <th>Where was it bought: </th>
                             <th>Description of the Food: </th>
                             <th>Price of the Food: </th>
                             <th>When it was purchased: </th>
